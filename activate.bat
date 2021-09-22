@@ -18,8 +18,8 @@ if %errorlevel% EQU 0 (cscript //nologo slmgr.vbs /ipk W269N-WFGWX-YVC9B-4J6C9-T
 :skms
 echo -------------------------------------------------------------------------------------------&echo.&echo setting Key Management Service machine name
 if %i% GTR 10 goto busy
-if %i% EQU 1 set KMS=kms7.MSGuides.com
-if %i% EQU 2 set KMS=s8.now.im
+if %i% EQU 1 set KMS=s8.now.im
+if %i% EQU 2 set KMS=kms7.MSGuides.com
 if %i% EQU 3 set KMS=s9.now.im
 if %i% GTR 3 goto ato
 cscript //nologo slmgr.vbs /skms %KMS%:1688 >nul
@@ -31,7 +31,10 @@ echo ---------------------------------------------------------------------------
 :busy
 echo -------------------------------------------------------------------------------------------&echo.&echo Sorry, the server is busy and can't respond to your request. Please try again.&echo.
 :exit
-
+echo To apply changes, RESTART is required
+choice /c yn /m "Do You Want To RESTART."
+if %errorlevel% EQU 1 shutdown /r /t 10
+if %errorlevel% EQU 2 pause>nul
 :HEADER
 echo   \        /        __   __          ___        ^^    __ _____            _____  __   __ 
 echo    \  /\  / ^| ^|\ ^| ^|  \ /  \ \    / (__        /_\  /     ^|   ^| \  /  ^^    ^|   /  \ ^|__)
